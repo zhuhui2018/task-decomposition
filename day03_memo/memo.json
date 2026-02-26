@@ -1,0 +1,24 @@
+{
+    "memos": [
+        {
+            "id": "1772072123",
+            "title": "学习python",
+            "content": "上午两个小时学习python",
+            "date": "2026-02-26",
+            "tag": "学习",
+            "remark": "无",
+            "priority": "中",
+            "status": "未完成"
+        },
+        {
+            "id": "1772072161",
+            "title": "买票",
+            "content": "中午买去杭州的机票",
+            "date": "2026-02-26",
+            "tag": "生活",
+            "remark": "无",
+            "priority": "中",
+            "status": "未完成"
+        }
+    ]
+}
