@@ -1,0 +1,16 @@
+[
+    {
+        "type": "study",
+        "date": "2026-03-09",
+        "duration": 120,
+        "subject": "python",
+        "note": "第一天学习"
+    },
+    {
+        "type": "study",
+        "date": "2026-03-10",
+        "duration": 60,
+        "subject": "python",
+        "note": "第二天学习"
+    }
+]

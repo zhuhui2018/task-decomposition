@@ -1,6 +1,23 @@
 # -*-coding:UTF-8-*-
 # author: 阿黄  time:2019/10/22
 
+import json  # 加在文件开头
+
+# ===== 文件操作 =====
+
+def load_data():
+    """从文件加载数据"""
+    try:
+        with open("money.json", "r", encoding="utf-8") as f:
+            return json.load(f)
+    except FileNotFoundError:
+        return {"records": [], "next_id": 1}
+
+def save_data(data):
+    """保存数据到文件"""
+    with open("money.json", "w", encoding="utf-8") as f:
+        json.dump(data, f, ensure_ascii=False, indent=4)
+
 def add_record(data):
     """添加新记录"""
     print("\n➕ 添加新记录")
@@ -85,28 +102,43 @@ def get_balance(data):
     return balance, total_income, total_expense
 
 
+# ===== 主菜单 =====
+
+def main():
+    """主程序"""
+    # 加载数据
+    data = load_data()
+
+    while True:
+        print("\n" + "="*40)
+        print("💰 记账本管理系统")
+        print("="*40)
+        print("1. 添加记录")
+        print("2. 查看所有记录")
+        print("3. 查看余额统计")
+        print("4. 退出")
+        print("="*40)
+
+        choice = input("请选择操作：")
+
+        if choice == "1":
+            data = add_record(data)
+        elif choice == "2":
+            show_records(data)
+        elif choice == "3":
+            balance, income, expense = get_balance(data)
+            print(f"\n📊 统计信息")
+            print("-" * 30)
+            print(f"总收入：{income:>10.2f}元")
+            print(f"总支出：{expense:>10.2f}元")
+            print(f"当前余额：{balance:>10.2f}元")
+            print(f"记录总数：{len(data['records'])}条")
+        elif choice == "4":
+            save_data(data)
+            print("👋 再见！")
+            break
+        else:
+            print("❌ 无效选择，请重新输入")
+
 if __name__ == "__main__":
-    # 初始化数据
-    data = {"records": [], "next_id": 1}
-
-    print("💰 记账本测试")
-    print("=" * 40)
-
-    # 添加4条测试记录
-    for i in range(4):
-        print(f"\n--- 第{i+1}条记录 ---")
-        data = add_record(data)
-
-    # 显示所有记录
-    print("\n📋 所有记录：")
-    show_records(data)
-
-    # 显示余额统计
-    balance, income, expense = get_balance(data)
-    print(f"\n📊 统计信息")
-    print("-" * 30)
-    print(f"总收入：{income:>10.2f}元")
-    print(f"总支出：{expense:>10.2f}元")
-    print(f"当前余额：{balance:>10.2f}元")
-    print(f"记录总数：{len(data['records'])}条")
-    print(f"下一个ID：{data['next_id']}")
+    main()
